@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Management App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/food.jpg'); /* Path to your image */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            height: 100vh; /* Full height */
+            display: flex;
+            flex-direction: column; /* Align items in a column */
+            justify-content: flex-start; /* Start from the top */
+            align-items: center; /* Center horizontally */
+        }
+
+        .header {
+            text-align: center; /* Center the text */
+            color: #007bff; /* Blue text for headings */
+            margin-top: 20px; /* Space from the top */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for better visibility */
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            width: 90%;
+            max-width: 800px; /* Max width for the form */
+            margin: 20px; /* Space around the container */
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Increase font size for h1 */
+            text-align: center;
+            color: #007bff; /* Blue color for h1 */
+        }
+
+        h2 {
+            font-size: 1.8rem; /* Increase font size for h2 */
+            text-align: center;
+            color: #007bff; /* Blue color for "Let's Donate" */
+            margin: 20px 0; /* Space above and below */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left; /* Align labels to the left */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000000; /* Dark black color for labels */
+            font-weight: bold; /* Bold text for labels */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px; /* Rounded corners for inputs */
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.3); /* Slightly transparent background for inputs */
+            color: #000; /* Black text for inputs */
+            transition: background 0.3s, box-shadow 0.3s; /* Transition effects */
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.5); /* Brighter background on focus */
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Glow effect on focus */
+        }
+
+        .btn {
+            background-color: #28a745; /* Green button */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 10px; /* Rounded corners for button */
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s, transform 0.3s; /* Smooth transitions */
+            font-size: 16px; /* Increased font size */
+        }
+
+        .btn:hover {
+            background-color: #218838; /* Darker shade on hover */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            border-radius: 10px; /* Rounded corners for the table */
+            overflow: hidden; /* Ensures rounded corners are visible */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Table shadow */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            padding: 12px; /* Increased padding for table header */
+            text-align: left;
+            background-color: #4CAF50; /* Green background for header */
+            color: white; /* White color for header text */
+        }
+
+        td {
+            padding: 12px; /* Increased padding for table cells */
+            text-align: left;
+            background-color: #eafaf1; /* Light green background for cells */
+            color: #2c3e50; /* Darker color for cell text */
+        }
+
+        tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05); /* Highlight on row hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome To Food Donation Page</h1>
+    </div>
+    <div class="glass-container">
+        <h2>Let's Donate</h2>
+        <form id="grocery-form">
+            <div class="form-group">
+                <label for="donor-name">Donor Name:</label>
+                <input type="text" id="donor-name" name="donor_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="food-name">Food Name:</label>
+                <input type="text" id="food-name" name="food_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="donate-date">Date of Donation:</label>
+                <input type="date" id="donate-date" name="donate_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Full Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <button type="submit" class="btn">Submit Data</button>
+        </form>
+
+        <h2>Donated Items List</h2>
+        <table id="grocery-list">
+            <thead>
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Food Name</th>
+                    <th>Quantity</th>
+                    <th>Date of Donation</th>
+                    <th>Phone Number</th>
+                    <th>Location     </th>
+                    <th>Full Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS will dynamically append rows here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const groceryForm = document.getElementById("grocery-form");
+            const groceryListTable = document.getElementById("grocery-list").getElementsByTagName('tbody')[0];
+
+            fetch('/get_groceries')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = 
+                            `<td>${item.donor_name}</td>
+                            <td>${item.food_name}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.donate_date}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.location}</td>
+                            <td>${item.address}</td>`;
+                        groceryListTable.appendChild(row);
+                    });
+                });
+
+            groceryForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const formData = new FormData(groceryForm);
+                fetch('/add_grocery', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                  .then(data => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = 
+                        `<td>${data.donor_name}</td>
+                        <td>${data.food_name}</td>
+                        <td>${data.quantity}</td>
+                        <td>${data.donate_date}</td>
+                        <td>${data.phone}</td>
+                        <td>${data.location}</td>
+                        <td>${data.address}</td>`;
+                    groceryListTable.appendChild(row);
+                    groceryForm.reset(); // Reset the form after submission
+                  });
+            });
+        });
+    </script>
+</body>
+</html>
